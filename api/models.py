@@ -47,5 +47,5 @@ class Trial(models.Model):
     summary = models.TextField(null=True)
     trial_page_url = models.TextField(null=True)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.registration_number
