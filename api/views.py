@@ -1,6 +1,5 @@
 from django.db.models import QuerySet
 from django.http import HttpRequest
-from django.shortcuts import get_object_or_404
 from ninja import NinjaAPI
 from ninja.pagination import paginate
  
@@ -12,7 +11,7 @@ api = NinjaAPI(title="Dummy API for ANZCTR trial data")
 @api.get("/hello")
 def hello(request: HttpRequest, name: str ="world") -> str:
     print(name)
-    return "Hello {}!".format(name)
+    return f"Hello {name}!"
  
 @api.get("/trials", response=list[TrialBrief])
 @paginate

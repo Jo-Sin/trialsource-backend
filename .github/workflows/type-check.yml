@@ -1,11 +1,11 @@
-name: Type Check
+name: Code Quality
 on:
   pull_request:
     branches: [ main ]
 jobs:
   mypy:
     runs-on: ubuntu-latest
-    name: Type check with mypy
+    name: Type and Lint check
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python 3.10
@@ -18,3 +18,6 @@ jobs:
     - name: Run mypy
       run: |
         mypy api backend
+    - name: Run ruff
+      run: |
+        ruff check .
