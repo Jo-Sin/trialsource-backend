@@ -10,7 +10,7 @@ from .schemas import TrialBrief
 api = NinjaAPI(title="Dummy API for ANZCTR trial data")
 
 @api.get("/hello")
-def hello(request: HttpRequest, name: str ="world") -> str:
+def hello(request: HttpRequest, name: str ="world"):
     print(name)
     return "Hello {}!".format(name)
  
