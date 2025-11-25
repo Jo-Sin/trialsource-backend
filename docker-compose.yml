@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  trialsource-backend:
+    build:
+      dockerfile: Dockerfile
+    container_name: trialsource_backend_container
+    ports:
+      - "8000:8000"
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /app
