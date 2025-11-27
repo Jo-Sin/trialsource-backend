@@ -5,6 +5,7 @@ from ninja.pagination import paginate
  
 from .models import Trial
 from .schemas import TrialBrief
+from .tasks import heartbeat
  
 api = NinjaAPI(title="Dummy API for ANZCTR trial data")
 
@@ -18,9 +19,15 @@ def hello(request: HttpRequest, name: str ="world") -> str:
 def list_trials(request: HttpRequest) -> QuerySet[Trial]:
     return Trial.objects.all()
  
-# @api.post("/books", response=BookOut)
-# def create_book(request: HttpRequest, payload: BookIn) -> Book:
-#     return Book.objects.create(**payload.model_dump())
+@api.get("/books", response=str)
+def create_book(request: HttpRequest) -> str:
+    heartbeat.delay()
+    return 'Success'
+
+# @api.post("/books", response=str)
+# def create_book(request: HttpRequest, payload: None) -> str:
+#     heartbeat.delay()
+#     return 'Success'
  
 # @api.get("/books/{book_id}", response=BookOut)
 # def get_book(request: HttpRequest, book_id: int) -> Book:
