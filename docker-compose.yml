@@ -10,7 +10,7 @@ services:
       interval: 5s
       timeout: 2s
       retries: 50
-      start_period: 30s
+      start_period: 10s
 
   django-backend:
     build:
@@ -38,8 +38,8 @@ services:
     container_name: celery_worker
     restart: unless-stopped
     depends_on:
-      redis-cache:
-        condition: service_healthy
+      - redis-cache
+      - django-backend
     develop:
       watch:
         - action: sync

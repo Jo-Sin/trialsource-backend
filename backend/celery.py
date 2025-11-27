@@ -1,7 +1,8 @@
 import os
+from typing import Any
 
 from celery import Celery
-from celery.schedules import crontab
+
 from api.tasks import heartbeat
 
 # Set the default Django settings module for the 'celery' program.
@@ -20,7 +21,7 @@ app.autodiscover_tasks()
 
 
 @app.on_after_finalize.connect
-def setup_periodic_tasks(sender: Celery, **kwargs):
+def setup_periodic_tasks(sender: Celery, **kwargs: dict[str, Any]) -> None:
     # Calls heartbeat() every 120 seconds.
     sender.add_periodic_task(1800.0, heartbeat.s(), name='Heartbeat every 30 minutes')
 
@@ -39,5 +40,5 @@ def setup_periodic_tasks(sender: Celery, **kwargs):
     # )
 
 @app.task
-def test(arg):
+def test(arg: Any) -> None:
     print(arg)
