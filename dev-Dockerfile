@@ -8,10 +8,9 @@ RUN mkdir /app
 WORKDIR /app
 
 RUN pip install --upgrade pip
-COPY --exclude=.env* --exclude=dev-* . .
-COPY ./.env /app/.env
+COPY --exclude=.env* . .
+COPY ./.env.dev /app/.env
 RUN pip install -r requirements.txt
 
-RUN chmod +x /app/entrypoint-server.sh
-RUN chmod +x /app/entrypoint-celery-worker.sh
-RUN chmod +x /app/entrypoint-celery-beat.sh
+RUN chmod +x /app/dev-entrypoint-server.sh
+RUN chmod +x /app/dev-entrypoint-worker.sh
