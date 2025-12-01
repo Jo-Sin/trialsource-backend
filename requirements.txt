@@ -27,7 +27,8 @@ mypy_extensions==1.1.0
 packaging==25.0
 pathspec==0.12.1
 prompt_toolkit==3.0.52
-psycopg2-binary==2.9.11
+psycopg==3.2.13
+psycopg-binary==3.2.13
 pydantic==2.12.4
 pydantic_core==2.41.5
 python-dateutil==2.9.0.post0
@@ -40,6 +41,7 @@ soupsieve==2.8
 sqlparse==0.5.3
 tomli==2.3.0
 types-PyYAML==6.0.12.20250915
+types-requests==2.32.4.20250913
 typing-inspection==0.4.2
 typing_extensions==4.15.0
 tzdata==2025.2
