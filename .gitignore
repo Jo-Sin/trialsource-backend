@@ -4,7 +4,7 @@ __pycache__/
 *.pyd
 .python-version
 
-.env
+.env*
 venv/
 .ruff_cache/
 .mypy_cache/

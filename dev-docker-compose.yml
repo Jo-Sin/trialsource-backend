@@ -15,8 +15,8 @@ services:
   django-backend:
     build:
       context: .
-      dockerfile: Dockerfile
-    entrypoint: /app/entrypoint-server.sh
+      dockerfile: dev-Dockerfile
+    entrypoint: /app/dev-entrypoint-server.sh
     container_name: django_backend_container
     restart: unless-stopped
     ports:
@@ -33,25 +33,9 @@ services:
   celery-worker:
     build:
       context: .
-      dockerfile: Dockerfile
-    entrypoint: /app/entrypoint-celery-worker.sh
+      dockerfile: dev-Dockerfile
+    entrypoint: /app/dev-entrypoint-worker.sh
     container_name: celery_worker
-    restart: unless-stopped
-    depends_on:
-      - redis-cache
-      - django-backend
-    develop:
-      watch:
-        - action: sync
-          path: .
-          target: /app
-  
-  celery-beat:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    entrypoint: /app/entrypoint-celery-beat.sh
-    container_name: celery_beat
     restart: unless-stopped
     depends_on:
       - redis-cache

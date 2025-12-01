@@ -2,13 +2,14 @@ import os
 from typing import Any
 
 from celery import Celery
+from celery.schedules import crontab
 
-from api.tasks import heartbeat
+from api.tasks import heartbeat, scrape
 
 # Set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings')
 
-app = Celery('backend')
+app = Celery('trialsource-backend')
 
 # Using a string here means the worker doesn't have to serialize
 # the configuration object to child processes.
@@ -33,11 +34,12 @@ def setup_periodic_tasks(sender: Celery, **kwargs: dict[str, Any]) -> None:
     # # Calls test('world') every 30 seconds
     # sender.add_periodic_task(30.0, test.s('world'), expires=10)
 
-    # # Executes every Monday morning at 7:30 a.m.
-    # sender.add_periodic_task(
-    #     crontab(hour=7, minute=30, day_of_week=1),
-    #     test.s('Happy Mondays!'),
-    # )
+    # Executes every Monday morning at 7:30 a.m.
+    sender.add_periodic_task(
+        crontab(hour=5, minute=7),
+        scrape.s(),
+        name='Scraper'
+    )
 
 @app.task
 def test(arg: Any) -> None:
