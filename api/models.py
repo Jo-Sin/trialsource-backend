@@ -3,7 +3,7 @@ from django.db import models
 
 
 # Create your models here.
-class Trial(models.Model):
+class AnzctrTrial(models.Model):
     registration_number = models.TextField(unique=True)
     ethics_status = models.TextField(null=True)
     date_submitted = models.TextField(null=True)

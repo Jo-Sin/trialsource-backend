@@ -1,11 +1,11 @@
 from ninja import ModelSchema
 
-from .models import Trial
+from .models import AnzctrTrial
 
 
-class TrialBrief(ModelSchema):
+class AnzctrTrialBrief(ModelSchema):
     class Meta:
-        model = Trial
+        model = AnzctrTrial
         fields = [
             'registration_number',
             'public_title',
@@ -13,3 +13,8 @@ class TrialBrief(ModelSchema):
             'description',
             'date_last_updated'
             ]
+        
+class AnzctrTrialFull(ModelSchema):
+    class Meta:
+        model = AnzctrTrial
+        fields = '__all__'
