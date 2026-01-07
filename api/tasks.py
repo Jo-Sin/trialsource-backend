@@ -1,6 +1,6 @@
 from celery import shared_task
 
-from .scraper import do_the_scrape
+from .collector.anzctr import scrape_anzctr
 
 
 @shared_task()
@@ -10,5 +10,5 @@ def heartbeat() -> None:
 @shared_task
 def scrape() -> None:
     print("Celery: Start scraping")
-    do_the_scrape()
+    scrape_anzctr()
     print("Celery: End scraping")
