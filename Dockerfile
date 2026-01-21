@@ -8,7 +8,7 @@ RUN mkdir /app
 WORKDIR /app
 
 RUN pip install --upgrade pip
-COPY --exclude=.env* --exclude=dev-* . .
+COPY . .
 COPY ./.env.prod /app/.env
 RUN pip install -r requirements.txt
 
