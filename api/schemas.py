@@ -1,7 +1,9 @@
-from ninja import ModelSchema
+from ninja import FilterLookup, ModelSchema, FilterSchema
+from typing import Annotated, Optional
 
 from .models import AnzctrTrial, ClinicalTrialsStudy, GenTrial
 
+IContainsField = Annotated[Optional[str], FilterLookup(['brief_title__icontains', 'description__icontains', 'summary__icontains', 'scientific_title__icontains'])]
 
 class AnzctrTrialBrief(ModelSchema):
     class Meta:
@@ -53,3 +55,6 @@ class GenTrialFull(ModelSchema):
     class Meta:
         model = GenTrial
         fields = '__all__'
+
+class TrialFilterSchema(FilterSchema):
+    search: IContainsField = None

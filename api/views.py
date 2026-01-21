@@ -4,7 +4,7 @@ from ninja import NinjaAPI
 from ninja.pagination import paginate
 
 from .models import AnzctrTrial, ClinicalTrialsStudy, GenTrial
-from .schemas import AnzctrTrialBrief, AnzctrTrialFull, ClinTrialBrief, ClinTrialFull, GenTrialBrief, GenTrialFull
+from .schemas import AnzctrTrialBrief, AnzctrTrialFull, ClinTrialBrief, ClinTrialFull, GenTrialBrief, GenTrialFull, TrialFilterSchema
 from .tasks import heartbeat
 
 api = NinjaAPI(title="Dummy API for ANZCTR trial data")
@@ -49,6 +49,13 @@ def list_gen_trials(request: HttpRequest) -> QuerySet[GenTrial]:
 @api.get("/trials/{id}", response=GenTrialFull)
 def get_gen_trial(request: HttpRequest, id: str) -> GenTrial:
     return GenTrial.objects.filter(tid=id).first()
+
+@api.post("/find-trials", response=list[GenTrialBrief])
+@paginate
+def find_trials(request: HttpRequest, filters: TrialFilterSchema) -> QuerySet[GenTrial]:
+    trials = GenTrial.objects.all()
+    trials = filters.filter(trials)
+    return trials
 
 # @api.post("/books", response=str)
 # def create_book(request: HttpRequest, payload: None) -> str:
