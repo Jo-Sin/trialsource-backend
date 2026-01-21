@@ -9,7 +9,7 @@ WORKDIR /app
 
 RUN pip install --upgrade pip
 COPY --exclude=.env* --exclude=dev-* . .
-COPY ./.env /app/.env
+COPY ./.env.prod /app/.env
 RUN pip install -r requirements.txt
 
 RUN chmod +x /app/entrypoint-server.sh

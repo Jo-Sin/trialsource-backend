@@ -204,7 +204,7 @@ def ignore_completed_trials(soup: BeautifulSoup) -> bool:
         print("Couldn't find recruitment status on trial page")
         return True
 
-def do_the_scrape() -> None:
+def scrape_anzctr() -> None:
     try:
         print("Attempting DB connection")
         conn = psycopg.connect(
@@ -285,3 +285,9 @@ def do_the_scrape() -> None:
         conn.close()
     except Exception as error:
         print('Error: ', error)
+
+def main() -> None:
+    scrape_anzctr()
+
+if __name__ == "__main__":
+    main()

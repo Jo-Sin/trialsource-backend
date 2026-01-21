@@ -30,34 +30,34 @@ services:
           path: .
           target: /app
   
-  celery-worker:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    entrypoint: /app/entrypoint-celery-worker.sh
-    container_name: celery_worker
-    restart: unless-stopped
-    depends_on:
-      - redis-cache
-      - django-backend
-    develop:
-      watch:
-        - action: sync
-          path: .
-          target: /app
+  # celery-worker:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   entrypoint: /app/entrypoint-celery-worker.sh
+  #   container_name: celery_worker
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - redis-cache
+  #     - django-backend
+  #   develop:
+  #     watch:
+  #       - action: sync
+  #         path: .
+  #         target: /app
   
-  celery-beat:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    entrypoint: /app/entrypoint-celery-beat.sh
-    container_name: celery_beat
-    restart: unless-stopped
-    depends_on:
-      - redis-cache
-      - django-backend
-    develop:
-      watch:
-        - action: sync
-          path: .
-          target: /app
+  # celery-beat:
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    # entrypoint: /app/entrypoint-celery-beat.sh
+    # container_name: celery_beat
+    # restart: unless-stopped
+    # depends_on:
+    #   - redis-cache
+    #   - django-backend
+    # develop:
+    #   watch:
+    #     - action: sync
+    #       path: .
+    #       target: /app
